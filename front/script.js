@@ -245,7 +245,6 @@ function initCreateRoomModal() {
         const genreRus = document.getElementById("select-genre").value;
         const friendID = document.getElementById("friend-id").value;
 
-      
         const genreMap = {
             "боевик": "action",
             "комедия": "comedy",
