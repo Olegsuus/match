@@ -1,0 +1,39 @@
+package storageUser
+
+import (
+	"context"
+	"go.mongodb.org/mongo-driver/bson/primitive"
+	apperr "match/internal/errors"
+	models "match/internal/models/user"
+	storage "match/internal/storage/mongo"
+)
+
+func (s *UserStorage) Add(ctx context.Context, username, hashedPassword string) (*models.User, error) {
+	_, err := s.Get(ctx, username)
+	if err == nil {
+		return nil, apperr.AppError{
+			Status:     409,
+			BErrorText: apperr.ErrUserAlreadyExists,
+			UErrorText: "Пользователь с таким userName уже создан",
+		}
+	}
+
+	//if !errors.Is(err, apperr.AppError{BErrorText: mongo.ErrNoDocuments.Error()}) &&
+	//	!errors.Is(err, apperr.AppError{BErrorText: apperr.ErrUserNotFound}) &&
+	//	!errors.Is(err, mongo.ErrNoDocuments) {
+	//	return nil, err
+	//}
+
+	user := models.User{
+		ID:       primitive.NewObjectID(),
+		Username: username,
+		Password: hashedPassword,
+	}
+
+	_, err = s.db.Collection(storage.UserCollection).InsertOne(ctx, user)
+	if err != nil {
+		return nil, err
+	}
+
+	return &user, nil
+}

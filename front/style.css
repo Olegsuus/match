@@ -1,0 +1,193 @@
+/* Сброс некоторых отступов */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    background: linear-gradient(120deg, #f6d365, #fda085);
+    /* fallback */
+    background-color: #fda085;
+    color: #333;
+    min-height: 100vh;
+}
+
+/* Шапка */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(255,255,255,0.7);
+    padding: 10px 20px;
+    position: sticky;
+    top: 0;
+}
+
+.app-title {
+    font-size: 1.8rem;
+    font-weight: bold;
+}
+
+.right-corner {
+    display: flex;
+    gap: 10px;
+}
+
+/* Кнопки в правом верхнем углу */
+.nav-btn {
+    background: #f76d6d;
+    color: #fff;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+}
+
+.nav-btn:hover {
+    background: #f55454;
+    transform: translateY(-2px);
+}
+
+/* Основной контейнер */
+main {
+    width: 100%;
+    max-width: 900px;
+    margin: 20px auto;
+    background: rgba(255,255,255,0.85);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+/* Приветствие */
+.welcome-section {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* Комната */
+.room-section {
+    margin-top: 20px;
+}
+
+.current-movie {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.room-actions {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.skip-btn, .like-btn {
+    background: #ddd;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.skip-btn:hover {
+    background: #ccc;
+}
+.like-btn {
+    background: #f76d6d;
+    color: #fff;
+    font-weight: bold;
+}
+.like-btn:hover {
+    background: #f55454;
+}
+
+/* Модалки */
+.modal {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.4);
+    z-index: 999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background: #fff;
+    width: 400px;
+    max-width: 80%;
+    padding: 20px;
+    border-radius: 8px;
+    position: relative;
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px; right: 10px;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.auth-tabs {
+    display: flex;
+    gap: 10px;
+    margin: 10px 0;
+}
+
+.auth-tabs button {
+    flex: 1;
+    padding: 8px;
+    border: none;
+    cursor: pointer;
+    background: #f5f5f5;
+}
+
+.auth-tabs button.active {
+    background: #f76d6d;
+    color: #fff;
+}
+
+.auth-tab-content {
+    margin-top: 10px;
+}
+
+.auth-tab-content input {
+    display: block;
+    width: 100%;
+    margin-bottom: 8px;
+    padding: 8px;
+}
+
+#register-btn, #login-btn, #create-room-btn {
+    width: 100%;
+    background: #f76d6d;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 5px;
+    cursor: pointer;
+}
+
+#register-btn:hover, #login-btn:hover, #create-room-btn:hover {
+    background: #f55454;
+}
+
+/* Сообщения */
+.info {
+    color: green;
+    margin-top: 5px;
+}
+
+.error {
+    color: red;
+    margin-top: 5px;
+}
