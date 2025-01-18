@@ -1,4 +1,4 @@
-/* Сброс некоторых отступов */
+
 * {
     box-sizing: border-box;
     margin: 0;
@@ -8,13 +8,12 @@
 body {
     font-family: 'Helvetica Neue', Arial, sans-serif;
     background: linear-gradient(120deg, #f6d365, #fda085);
-    /* fallback */
     background-color: #fda085;
     color: #333;
     min-height: 100vh;
 }
 
-/* Шапка */
+
 header {
     display: flex;
     justify-content: space-between;
@@ -35,7 +34,7 @@ header {
     gap: 10px;
 }
 
-/* Кнопки в правом верхнем углу */
+
 .nav-btn {
     background: #f76d6d;
     color: #fff;
@@ -51,7 +50,6 @@ header {
     transform: translateY(-2px);
 }
 
-/* Основной контейнер */
 main {
     width: 100%;
     max-width: 900px;
@@ -62,7 +60,6 @@ main {
     box-shadow: 0 8px 20px rgba(0,0,0,0.15);
 }
 
-/* Приветствие */
 .welcome-section {
     text-align: center;
     margin-bottom: 20px;
@@ -72,7 +69,6 @@ main {
     display: none !important;
 }
 
-/* Комната */
 .room-section {
     margin-top: 20px;
 }
