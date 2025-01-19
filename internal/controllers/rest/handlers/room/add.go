@@ -2,8 +2,9 @@ package handlersRoom
 
 import (
 	"encoding/json"
-	"go.mongodb.org/mongo-driver/bson/primitive"
 	"net/http"
+
+	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
 func (h *RoomHandler) CreateRoom(w http.ResponseWriter, r *http.Request) {
@@ -30,6 +31,15 @@ func (h *RoomHandler) CreateRoom(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
+	}
+
+	if len(body.UserIDs) > 1 {
+		friendID := body.UserIDs[1]
+		fromID := body.UserIDs[0]
+		err := h.ws.SendInviteMessage(friendID, fromID, room.ID.Hex())
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+		}
 	}
 
 	json.NewEncoder(w).Encode(room)

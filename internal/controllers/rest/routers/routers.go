@@ -4,10 +4,11 @@ import (
 	"github.com/gorilla/mux"
 	handlersAuth "match/internal/controllers/rest/handlers/auth"
 	handlersRoom "match/internal/controllers/rest/handlers/room"
+	"match/internal/controllers/ws"
 	"net/http"
 )
 
-func RegisterRoutes(authH *handlersAuth.AuthHandler, roomH *handlersRoom.RoomHandler) *mux.Router {
+func RegisterRoutes(authH *handlersAuth.AuthHandler, roomH *handlersRoom.RoomHandler, wsHandler *ws.WSHandler) *mux.Router {
 	router := mux.NewRouter()
 
 	router.HandleFunc("/auth/register", authH.Register).Methods(http.MethodPost)
@@ -18,6 +19,8 @@ func RegisterRoutes(authH *handlersAuth.AuthHandler, roomH *handlersRoom.RoomHan
 	router.HandleFunc("/room/like", roomH.LikeMovie).Methods(http.MethodPost)
 	router.HandleFunc("/room/matches", roomH.GetMatches).Methods(http.MethodGet)
 	router.HandleFunc("/room/movies", roomH.GetMovies).Methods(http.MethodGet)
+
+	router.HandleFunc("/ws", wsHandler.HandleWSUpgrade)
 
 	router.PathPrefix("/").Handler(http.FileServer(http.Dir("./front/")))
 

@@ -1,0 +1,19 @@
+env: "dev"
+
+server:
+  port: "4444"
+
+jwt:
+  secret: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MzY0MjIzMjQsImlhdCI6MTczNjMzNTkyNCwidXNlcl9pZCI6IjY3N2U2MjBlOTAyMWNhZDhjZmRlYTJjNCJ9.mmrflOLBGvwpzlZ_TSY6CHbufVLtYjuPLDAKUrwjykE"
+
+mongo:
+  uri: "mongodb://localhost:27017"
+  dbname: "my_match_db"
+
+movie_api:
+  key: "81158d99"
+  url: "http://www.omdbapi.com"
+
+
+log:
+  log_file: "logs/info.log"

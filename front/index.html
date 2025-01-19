@@ -9,34 +9,44 @@
 
 <header>
     <div class="app-title">Movie Tinder</div>
-    <div class="right-corner" id="nav-area">
-    </div>
+    <div class="right-corner" id="nav-area"></div>
 </header>
-
 
 <main>
     <div class="welcome-section" id="welcome-section">
         <h1>Добро пожаловать в Movie Tinder!</h1>
         <p>
-            Это сервис, где вы можете подобрать фильмы по жанрам вместе с друзьями.
+            Сервис, где вы можете подобрать фильмы по жанрам вместе с друзьями.
             Лайкайте или пропускайте фильмы — и если вы с другом залайкали один и тот же фильм,
             появится «Мэтч!»
         </p>
+        <!-- Кнопка по центру -->
+        <button id="create-room-big-btn" class="big-btn">
+            Создать комнату
+        </button>
     </div>
 
+    <!-- Если создатель комнаты ждёт, пока друг примет приглашение -->
+    <div class="pending-section hidden" id="pending-section">
+        <h2>Ожидание подтверждения…</h2>
+        <p>Второй пользователь ещё не принял приглашение.</p>
+    </div>
+
+    <!-- Комната -->
     <div class="room-section hidden" id="room-section">
         <h2>Комната</h2>
-        <div class="current-movie" id="current-movie">
-        </div>
+        <div class="current-movie" id="current-movie"></div>
         <div class="room-actions">
-            <button class="skip-btn" id="skip-btn">Пропустить</button>
-            <button class="like-btn" id="like-btn">Лайк</button>
+            <button class="big-btn" id="skip-btn">Пропустить</button>
+            <button class="big-btn" id="like-btn">Лайк</button>
+            <button class="big-btn" id="matches-btn">Посмотреть мэтчи</button>
         </div>
     </div>
 </main>
 
+<!-- Модалка Авторизация / Регистрация -->
 <div class="modal hidden" id="auth-modal">
-    <div class="modal-content">
+    <div class="modal-content big-modal-content">
         <span class="close-btn" id="close-auth-modal">&times;</span>
         <h2 id="auth-title">Авторизация</h2>
         <div class="auth-tabs">
@@ -44,43 +54,77 @@
             <button id="auth-register-tab">Регистрация</button>
         </div>
 
+        <!-- Вкладка "Вход" -->
         <div class="auth-tab-content" id="auth-login-tab-content">
-            <input type="text" id="login-username" placeholder="Username" />
-            <input type="password" id="login-password" placeholder="Password" />
-            <button id="login-btn">Войти</button>
+            <input class="big-input" type="text" id="login-username" placeholder="Username" />
+            <input class="big-input" type="password" id="login-password" placeholder="Password" />
+            <button id="login-btn" class="big-btn">Войти</button>
             <p class="info" id="login-info"></p>
             <p class="error" id="login-error"></p>
         </div>
 
+        <!-- Вкладка "Регистрация" -->
         <div class="auth-tab-content hidden" id="auth-register-tab-content">
-            <input type="text" id="reg-username" placeholder="Username" />
-            <input type="password" id="reg-password" placeholder="Password" />
-            <button id="register-btn">Зарегистрироваться</button>
+            <input class="big-input" type="text" id="reg-username" placeholder="Username" />
+            <input class="big-input" type="password" id="reg-password" placeholder="Password" />
+            <button id="register-btn" class="big-btn">Зарегистрироваться</button>
             <p class="info" id="reg-info"></p>
             <p class="error" id="reg-error"></p>
         </div>
     </div>
 </div>
 
-<!-- Модальное окно: Создать комнату -->
+<!-- Модалка "Создать комнату" -->
 <div class="modal hidden" id="create-room-modal">
-    <div class="modal-content">
+    <div class="modal-content big-modal-content">
         <span class="close-btn" id="close-room-modal">&times;</span>
         <h2>Создать комнату</h2>
         <label for="select-genre">Жанр:</label>
-        <select id="select-genre">
+        <select id="select-genre" class="big-input">
             <option value="боевик">Боевик</option>
             <option value="комедия">Комедия</option>
             <option value="драма">Драма</option>
             <option value="ужасы">Ужасы</option>
             <option value="фантастика">Фантастика</option>
         </select>
-        <br /><br />
-        <input type="text" id="friend-id" placeholder="ID друга" />
-        <br /><br />
-        <button id="create-room-btn">Создать</button>
+        <br><br>
+        <input class="big-input" type="text" id="friend-id" placeholder="ID друга" />
+        <br><br>
+        <button id="create-room-btn" class="big-btn">Создать</button>
         <p class="info" id="create-room-info"></p>
         <p class="error" id="create-room-error"></p>
+    </div>
+</div>
+
+<!-- Модалка "Приглашение" -->
+<div class="modal hidden" id="invitation-modal">
+    <div class="modal-content big-modal-content">
+        <h2>Приглашение</h2>
+        <p id="invitation-text"></p>
+        <div style="text-align:center; margin-top:20px;">
+            <button id="btn-invite-accept" class="big-btn">Принять</button>
+            <button id="btn-invite-decline" class="big-btn">Отклонить</button>
+        </div>
+    </div>
+</div>
+
+<!-- Модалка "У вас мэтч!" -->
+<div class="modal hidden" id="instant-match-modal">
+    <div class="modal-content big-modal-content">
+        <h2>У вас мэтч!</h2>
+        <div id="instant-match-details"></div>
+        <div style="text-align:center; margin-top:20px;">
+            <button id="close-instant-match" class="big-btn">OK</button>
+        </div>
+    </div>
+</div>
+
+<!-- Модалка "Список мэтчей" -->
+<div class="modal hidden" id="matches-modal">
+    <div class="modal-content big-modal-content" style="max-height:80vh; overflow:auto;">
+        <span class="close-btn" id="close-matches-modal">&times;</span>
+        <h2>Ваши мэтчи</h2>
+        <div id="matches-list"></div>
     </div>
 </div>
 

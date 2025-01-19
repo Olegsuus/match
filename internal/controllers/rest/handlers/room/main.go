@@ -3,12 +3,14 @@ package handlersRoom
 import (
 	"context"
 	"go.mongodb.org/mongo-driver/bson/primitive"
+	"match/internal/controllers/ws"
 	modelsMovie "match/internal/models/movie"
 	modelsRoom "match/internal/models/room"
 )
 
 type RoomHandler struct {
 	rmP RoomServicesProvider
+	ws  *ws.WSHandler
 }
 
 type RoomServicesProvider interface {
@@ -19,8 +21,9 @@ type RoomServicesProvider interface {
 	GetMoviesForRoom(ctx context.Context, roomID primitive.ObjectID, page int) ([]modelsMovie.Movie, error)
 }
 
-func NewRoomHandler(rmP RoomServicesProvider) *RoomHandler {
+func NewRoomHandler(rmP RoomServicesProvider, ws *ws.WSHandler) *RoomHandler {
 	return &RoomHandler{
 		rmP: rmP,
+		ws:  ws,
 	}
 }

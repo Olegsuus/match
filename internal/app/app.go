@@ -8,6 +8,7 @@ import (
 	handlersAuth "match/internal/controllers/rest/handlers/auth"
 	handlersRoom "match/internal/controllers/rest/handlers/room"
 	"match/internal/controllers/rest/routers"
+	"match/internal/controllers/ws"
 	"match/internal/logs"
 	servicesAuth "match/internal/services/auth"
 	servicesRoom "match/internal/services/room"
@@ -50,10 +51,11 @@ func NewApp(cfg *config.Config) (*App, error) {
 	authServices := servicesAuth.NewAuthService(userStorage, cfg.JWT.Secret, l)
 	roomServices := servicesRoom.NewRoomService(roomStorage, movieStorage, l)
 
+	wsHandler := ws.NewWSHandler(roomStorage)
 	authHandlers := handlersAuth.NewAuthHandler(authServices)
-	roomHandlers := handlersRoom.NewRoomHandler(roomServices)
+	roomHandlers := handlersRoom.NewRoomHandler(roomServices, wsHandler)
 
-	router := routers.RegisterRoutes(authHandlers, roomHandlers)
+	router := routers.RegisterRoutes(authHandlers, roomHandlers, wsHandler)
 
 	server := &http.Server{
 		Addr:    fmt.Sprintf(":%s", cfg.Server.Port),

@@ -18,12 +18,6 @@ func (s *UserStorage) Add(ctx context.Context, username, hashedPassword string) 
 		}
 	}
 
-	//if !errors.Is(err, apperr.AppError{BErrorText: mongo.ErrNoDocuments.Error()}) &&
-	//	!errors.Is(err, apperr.AppError{BErrorText: apperr.ErrUserNotFound}) &&
-	//	!errors.Is(err, mongo.ErrNoDocuments) {
-	//	return nil, err
-	//}
-
 	user := models.User{
 		ID:       primitive.NewObjectID(),
 		Username: username,
