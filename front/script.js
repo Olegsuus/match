@@ -211,9 +211,7 @@ function renderNav() {
     }
 }
 
-/**
- * Открыть/закрыть модалку авторизации
- */
+
 function openAuthModal(defaultTab = "login") {
     const authModal = document.getElementById("auth-modal");
     authModal.classList.remove("hidden");
@@ -232,16 +230,12 @@ function openAuthModal(defaultTab = "login") {
     }
 }
 
-/**
- * initAuthModal
- */
 function initAuthModal() {
     const authModal = document.getElementById("auth-modal");
     document.getElementById("close-auth-modal").onclick = () => {
         authModal.classList.add("hidden");
     };
 
-    // Табы
     const loginTab = document.getElementById("auth-login-tab");
     const regTab = document.getElementById("auth-register-tab");
     const loginTabContent = document.getElementById("auth-login-tab-content");
@@ -260,7 +254,6 @@ function initAuthModal() {
         loginTabContent.classList.add("hidden");
     };
 
-    // Кнопка "Войти"
     document.getElementById("login-btn").onclick = async () => {
         const username = document.getElementById("login-username").value;
         const password = document.getElementById("login-password").value;
@@ -277,7 +270,6 @@ function initAuthModal() {
         }
     };
 
-    // Кнопка "Регистрация"
     document.getElementById("register-btn").onclick = async () => {
         const regUsername = document.getElementById("reg-username").value;
         const regPassword = document.getElementById("reg-password").value;
@@ -297,9 +289,7 @@ function initAuthModal() {
     };
 }
 
-/**
- * initCreateRoomModal
- */
+
 function initCreateRoomModal() {
     const roomModal = document.getElementById("create-room-modal");
     document.getElementById("close-room-modal").onclick = () => {
@@ -352,7 +342,6 @@ function initCreateRoomModal() {
         }
     };
 
-    // Большая кнопка на welcome
     const createRoomBigBtn = document.getElementById("create-room-big-btn");
     createRoomBigBtn.onclick = () => {
         if (!isAuthorized) {
@@ -363,9 +352,7 @@ function initCreateRoomModal() {
     };
 }
 
-/**
- * showRoomSection
- */
+
 async function showRoomSection() {
     document.getElementById("pending-section").classList.add("hidden");
     document.getElementById("welcome-section").classList.add("hidden");
@@ -384,9 +371,7 @@ async function showRoomSection() {
     renderMovie();
 }
 
-/**
- * renderMovie
- */
+
 function renderMovie() {
     const cont = document.getElementById("current-movie");
     cont.innerHTML = "";
@@ -419,17 +404,13 @@ function renderMovie() {
     `;
 }
 
-/**
- * nextMovie
- */
+
 function nextMovie() {
     currentMovieIndex++;
     renderMovie();
 }
 
-/**
- * likeMovie
- */
+
 async function likeMovie() {
     if (!currentRoomID) {
         alert("Сначала создайте комнату");
@@ -457,16 +438,13 @@ async function likeMovie() {
     }
 }
 
-/**
- * viewMatches
- */
+
 async function viewMatches() {
     if (!currentRoomID) {
         alert("Комната не выбрана");
         return;
     }
     try {
-        // Сервер возвращает массив фильмов (Title,Year,Poster,imdbID)
         const movies = await apiCall("GET", `${BASE_URL}/room/matches?room_id=${currentRoomID}&detailed=true`);
         if (!Array.isArray(movies) || movies.length === 0) {
             alert("Пока нет мэтчей");
@@ -478,9 +456,7 @@ async function viewMatches() {
     }
 }
 
-/**
- * showMatchesModal
- */
+
 function showMatchesModal(movies) {
     const modal = document.getElementById("matches-modal");
     const listEl = document.getElementById("matches-list");
@@ -506,9 +482,7 @@ function showMatchesModal(movies) {
     modal.classList.remove("hidden");
 }
 
-/**
- * logout
- */
+
 function logout() {
     jwtToken = "";
     isAuthorized = false;
